@@ -45,10 +45,13 @@ if (-not (Test-Path $TargetDir)) {
 
 $ItemsToCopy = @(
     "SKILL.md",
+    "AGENTS.md",
+    "CLAUDE.md",
     "README.md",
     "pyproject.toml",
     "requirements.txt",
     "LICENSE",
+    ".cursor",
     "scripts",
     "scientific_plotting",
     "examples",
@@ -75,3 +78,4 @@ if ($Pip) {
 
 Write-Host "`n[OK] Installation completed successfully!" -ForegroundColor Green
 Write-Host "Skill is now active and ready for Antigravity, Gemini CLI, Cursor, and Claude Code." -ForegroundColor Cyan
+

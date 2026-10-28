@@ -1,0 +1,28 @@
+---
+description: Publication-ready scientific plotting guidelines for research figures
+globs: **/*plot*.py, **/*fig*.py, **/*chart*.py, **/figure_config.py, **/*.tex
+alwaysApply: false
+---
+
+# Scientific Plotting Rules (Cursor / Windsurf)
+
+When creating or modifying scientific figures, plots, or LaTeX diagrams:
+
+1. **Physical 1:1 Canvas Size**:
+   - Single Column: Elsevier 85mm (3.35 in), IEEE 88.9mm (3.50 in), Nature 89mm (3.50 in), Chinese Core 80mm (3.15 in).
+   - Double Column: Elsevier 170mm (6.69 in), IEEE 181.9mm (7.16 in), Nature 183mm (7.20 in), Chinese Core 165mm (6.50 in).
+   - Use `get_canvas_size(journal, columns)` from `scientific_plotting` or `figure_config`.
+
+2. **Typography & Font Embedding**:
+   - Strict `pdf.fonttype = 42` and `ps.fonttype = 42` (TrueType embedding).
+   - Base font size: 8.5–9.5 pt (printed text must never drop below 6.5 pt).
+   - Sans-serif: Arial (preferred) or Helvetica. Serif: Times New Roman. CJK: SimSun / SimHei.
+
+3. **Color Palettes**:
+   - Use Tol-muted (`TOL_MUTED_LIST`) or Okabe-Ito (`OKABE_ITO_LIST`).
+   - Reserve `#FF1A1A` / `#D62728` strictly for ROI boxes, cutoffs, and alerts.
+
+4. **Multi-Panel Qualitative Grids**:
+   - Tight spacing (`wspace=0.015`, `hspace=0.03`).
+   - Provide ROI bounding boxes and zoomed insets.
+   - Attach bottom-left metric badges with dark background.

@@ -22,9 +22,15 @@
 
 本仓库同时支持作为 **AI 编码助手技能（Skill）** 或 **Python 独立模块** 使用。
 
-### 1. 作为 AI Agent 技能安装 (Antigravity / Gemini CLI)
+### 1. 作为 AI Agent 技能安装 (跨生态多助手全面兼容)
 
-#### 全局安装 (所有工程自动生效)
+本仓库原生内置了面向各大主流 AI 助手的规范适配层：
+- **Antigravity / Gemini CLI**：通过 `SKILL.md` 自动发现技能
+- **Claude / Claude Code**：通过根目录 `CLAUDE.md` 深度理解指令
+- **OpenAI Codex / DeepSeek / 通用智能体**：通过 `AGENTS.md` 注入顶刊绘图准则
+- **Cursor / Windsurf**：通过 `.cursor/rules/scientific-plotting.mdc` 自动生效
+
+#### A. 全局安装 (所有项目均可直接唤醒)
 - **Windows (PowerShell)**:
   ```powershell
   git clone https://github.com/Estevan233/scientific-plotting.git "$HOME\.gemini\skills\scientific-plotting"
@@ -34,15 +40,21 @@
   git clone https://github.com/Estevan233/scientific-plotting.git ~/.gemini/skills/scientific-plotting
   ```
 
-#### 当前项目工作区安装 (Workspace Only)
-- **通用命令 (所有平台)**:
+#### B. 当前项目工作区安装 (适用 Codex / Claude / DeepSeek / Cursor)
+在任意科研代码仓库根目录下运行：
+- **作为工作区技能目录引入**:
   ```bash
   mkdir -p .agents/skills
   git clone https://github.com/Estevan233/scientific-plotting.git .agents/skills/scientific-plotting
   ```
-- **作为 Git 子模块引入 (推荐团队协同)**:
+- **作为 Git 子模块引入 (团队协同推荐)**:
   ```bash
   git submodule add https://github.com/Estevan233/scientific-plotting.git .agents/skills/scientific-plotting
+  ```
+- **Cursor 规则一键链接 (可选)**:
+  ```bash
+  mkdir -p .cursor/rules
+  cp .agents/skills/scientific-plotting/.cursor/rules/* .cursor/rules/
   ```
 
 ### 2. 作为 Python 绘图包安装 (Pip)
@@ -157,3 +169,4 @@ python tests/test_examples.py
 欢迎提交 Issue 和 Pull Request 补充更多学科（如医学、化学、材料力学等）的期刊预设！
 
 本项目采用 [MIT License](LICENSE) 开源。
+

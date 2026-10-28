@@ -48,10 +48,13 @@ mkdir -p "$TARGET_DIR"
 
 ITEMS=(
   "SKILL.md"
+  "AGENTS.md"
+  "CLAUDE.md"
   "README.md"
   "pyproject.toml"
   "requirements.txt"
   "LICENSE"
+  ".cursor"
   "scripts"
   "scientific_plotting"
   "examples"
@@ -73,3 +76,4 @@ fi
 echo ""
 echo "[OK] Installation completed successfully!"
 echo "Skill is ready for Antigravity, Gemini CLI, Cursor, and Claude Code."
+

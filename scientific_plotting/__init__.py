@@ -44,3 +44,4 @@ __all__ = [
     "add_metric_badge",
     "save_publication_figure",
 ]
+
