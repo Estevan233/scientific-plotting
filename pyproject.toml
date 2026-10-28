@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scientific-plotting"
+version = "1.0.0"
+description = "Publication-ready scientific plotting engine for Elsevier, IEEE, Nature, Springer, ACM, and Chinese Core journals"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Estevan", email = "estevan@example.com" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "matplotlib>=3.7.0",
+    "numpy>=1.20.0",
+    "pillow>=8.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Estevan233/scientific-plotting"
+"Repository" = "https://github.com/Estevan233/scientific-plotting.git"
+"Bug Tracker" = "https://github.com/Estevan233/scientific-plotting/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scientific_plotting*"]

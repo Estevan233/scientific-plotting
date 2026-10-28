@@ -1,0 +1,78 @@
+\documentclass[tikz,border=12pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, shadows.blur, fit}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\sffamily\small,
+    >=Stealth,
+    node distance=1.2cm and 1.0cm,
+    % ── 基础卡片样式 ──────────────────────────────────────
+    base card/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=#1!80!black,
+        line width=0.7pt,
+        fill=#1!12,
+        align=center,
+        inner sep=6pt,
+        blur shadow={shadow blur steps=3, shadow blur radius=1.5pt, shadow opacity=15}
+    },
+    input card/.style={base card=gray, minimum width=2.0cm, minimum height=1.0cm},
+    backbone card/.style={base card=blue!80!black, minimum width=2.4cm, minimum height=1.2cm},
+    module card/.style={base card=teal!80!black, minimum width=2.2cm, minimum height=1.1cm},
+    output card/.style={base card=orange!90!black, minimum width=2.0cm, minimum height=1.0cm},
+    loss card/.style={base card=red!80!black, minimum width=2.0cm, minimum height=0.9cm},
+    % ── 连线样式 ──────────────────────────────────────────
+    flow arrow/.style={->, line width=1.0pt, draw=gray!80!black},
+    skip arrow/.style={->, line width=0.8pt, draw=teal!90!black, dashed},
+    % ── 分组轮廓容器 ──────────────────────────────────────
+    group container/.style={
+        draw=blue!60!black,
+        dashed,
+        line width=0.6pt,
+        rounded corners=5pt,
+        fill=blue!3,
+        inner sep=10pt
+    }
+]
+
+    % 1. 输入节点
+    \node[input card] (input) {Raw Concrete\\Image ($H \times W \times 3$)};
+
+    % 2. 特征提取主干 (Backbone)
+    \node[backbone card, right=of input] (stage1) {Feature Extractor\\(ResNet / Swin)};
+    \node[backbone card, right=of stage1] (stage2) {Multi-Scale\\Context Pool};
+
+    % 3. 核心创新模块 (Proposed Module)
+    \node[module card, right=of stage2] (attention) {Directional\\Filter Bank};
+    \node[module card, below=0.8cm of attention] (vbgmm) {Variational Bayesian\\GMM Clustering};
+
+    % 4. 输出分割与优化
+    \node[output card, right=of attention] (output) {Refined Crack\\Mask ($H \times W$)};
+
+    % 5. 目标损失约束
+    \node[loss card, below=0.8cm of output] (loss) {Topology-Aware\\Loss Function};
+
+    % ── 连线流动 ──────────────────────────────────────────
+    \draw[flow arrow] (input) -- (stage1);
+    \draw[flow arrow] (stage1) -- (stage2);
+    \draw[flow arrow] (stage2) -- (attention);
+    \draw[flow arrow] (attention) -- (output);
+    \draw[flow arrow] (attention) -- (vbgmm);
+    \draw[flow arrow] (vbgmm) -| (output);
+    \draw[flow arrow] (output) -- (loss);
+
+    % 跳跃残差连接
+    \draw[skip arrow] (stage1.south) -- ++(0,-0.4) -| (vbgmm.west)
+        node[pos=0.25, below, font=\scriptsize\color{teal!80!black}] {Skip Geometry Prior};
+
+    % ── 外围分组容器框 ────────────────────────────────────
+    \begin{scope}[on background layer]
+        \node[group container, fit=(stage1) (stage2), label={[font=\footnotesize\bfseries, color=blue!70!black]above:Stage 1: Representation Learning}] (g1) {};
+        \node[group container, draw=teal!60!black, fill=teal!2, fit=(attention) (vbgmm), label={[font=\footnotesize\bfseries, color=teal!80!black]above:Stage 2: Proposed Clustering \& Attention}] (g2) {};
+    \end{scope}
+
+\end{tikzpicture}
+\end{document}
+
